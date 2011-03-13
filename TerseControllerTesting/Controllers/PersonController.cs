@@ -56,7 +56,11 @@ namespace TerseControllerTesting.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View(_personRepository.GetById(id));
+            var person = _personRepository.GetById(id);
+            if (person == null)
+                return new HttpStatusCodeResult(404);
+
+            return View(person);
         }
 
         //
