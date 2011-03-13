@@ -1,0 +1,18 @@
+﻿@model IEnumerable<TerseControllerTesting.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (Model.Count() == 0) {
+    <p>No people at the moment. @Html.ActionLink("Add one", "Create").</p>
+} else {
+    <ul>
+    @foreach (var person in Model) {
+        <li>@Html.ActionLink(string.Format("\"{0} {1}\" <{2}>", person.FirstName, person.LastName, person.EmailAddress), "Edit", new { Id = person.Id })</li>
+    }
+    </ul>
+    <p>@Html.ActionLink("Add new person.", "Create")</p>
+}

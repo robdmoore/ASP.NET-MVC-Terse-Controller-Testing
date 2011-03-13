@@ -1,0 +1,18 @@
+﻿@model TerseControllerTesting.Models.Person
+
+@{
+    var action = ViewContext.RouteData.Values["action"];
+    ViewBag.Title = action;
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+<h2>@action Person</h2>
+
+@using (Html.BeginForm()) {
+    <p>@Html.LabelFor(m => m.FirstName) @Html.TextBoxFor(m => m.FirstName)<br />@Html.ValidationMessageFor(m => m.FirstName)</p>
+    <p>@Html.LabelFor(m => m.LastName) @Html.TextBoxFor(m => m.LastName)<br />@Html.ValidationMessageFor(m => m.LastName)</p>
+    <p>@Html.LabelFor(m => m.EmailAddress) @Html.TextBoxFor(m => m.EmailAddress)<br />@Html.ValidationMessageFor(m => m.EmailAddress)</p>
+    <p><input type="submit" value="@action" /></p>
+}
