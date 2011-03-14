@@ -8,7 +8,7 @@ namespace TerseControllerTesting.Data
         Person GetById(int id);
         IEnumerable<Person> GetAll();
         void Save(Person person);
-        bool EmailExists(string emailAddress);
-        bool EmailExists(string emailAddress, int idOfExistingPerson);
+        bool EmailBelongsToSomeoneElse(string emailAddress);
+        bool EmailBelongsToSomeoneElse(string emailAddress, int idOfExistingPerson);
     }
 }

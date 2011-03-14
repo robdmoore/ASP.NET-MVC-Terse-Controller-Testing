@@ -50,12 +50,12 @@ namespace TerseControllerTesting.Data
 
         }
 
-        public bool EmailExists(string emailAddress)
+        public bool EmailBelongsToSomeoneElse(string emailAddress)
         {
             return _database.Any(p => p.EmailAddress == emailAddress);
         }
 
-        public bool EmailExists(string emailAddress, int idOfExistingPerson)
+        public bool EmailBelongsToSomeoneElse(string emailAddress, int idOfExistingPerson)
         {
             return _database.Any(p => p.EmailAddress == emailAddress && p.Id != idOfExistingPerson);
         }

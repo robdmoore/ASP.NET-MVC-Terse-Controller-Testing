@@ -37,7 +37,7 @@ namespace TerseControllerTesting.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!_personRepository.EmailExists(person.EmailAddress))
+                if (!_personRepository.EmailBelongsToSomeoneElse(person.EmailAddress))
                 {
                     _personRepository.Save(person);
                     return RedirectToAction("Index");
@@ -71,7 +71,7 @@ namespace TerseControllerTesting.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!_personRepository.EmailExists(person.EmailAddress, id))
+                if (!_personRepository.EmailBelongsToSomeoneElse(person.EmailAddress, id))
                 {
                     person.Id = id;
                     _personRepository.Save(person);
