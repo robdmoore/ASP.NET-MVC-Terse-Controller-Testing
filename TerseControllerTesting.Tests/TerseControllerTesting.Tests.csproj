@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="01_Verbose\PersonControllerUnitTests.cs" />
+    <Compile Include="02_AutoMocking\PersonControllerUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
