@@ -72,6 +72,8 @@
     <Compile Include="01_Verbose\PersonControllerUnitTests.cs" />
     <Compile Include="02_AutoMocking\PersonControllerUnitTests.cs" />
     <Compile Include="03_MVCContrib.TestHelper\PersonControllerUnitTests.cs" />
+    <Compile Include="04_CustomSyntax\MvcControllerTestingExtensions.cs" />
+    <Compile Include="04_CustomSyntax\PersonControllerUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
