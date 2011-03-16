@@ -16,7 +16,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
         #region Setup
 
         private AutoMock _autoMock;
-
+        private PersonController _controller;
         private readonly Person _person = new Person {FirstName = "FirstName", LastName = "LastName", EmailAddress = "email@email.com"};
         private const int PersonId = 1;
 
@@ -24,6 +24,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
         public void Setup()
         {
             _autoMock = new AutoMock();
+            _controller = _autoMock.Resolve<PersonController>();
             _person.Id = 0;
         }
 
@@ -37,7 +38,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             // Arrange
 
             // Act
-            var viewResult = _autoMock.Resolve<PersonController>().Index() as ViewResult;
+            var viewResult = _controller.Index() as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -57,7 +58,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             // Arrange
 
             // Act
-            var viewResult = _autoMock.Resolve<PersonController>().Create() as ViewResult;
+            var viewResult = _controller.Create() as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -68,11 +69,10 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
         public void Should_return_edit_view_with_person_model_after_post_to_create_with_invalid_model()
         {
             // Arrange
-            var controller = _autoMock.Resolve<PersonController>();
-            controller.ModelState.AddModelError("Key", "Error");
+            _controller.ModelState.AddModelError("Key", "Error");
 
             // Act
-            var viewResult = controller.Create(_person) as ViewResult;
+            var viewResult = _controller.Create(_person) as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -86,11 +86,10 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
         public void Should_return_edit_view_with_person_model_and_error_after_post_to_create_with_duplicate_email()
         {
             // Arrange
-            var controller = _autoMock.Resolve<PersonController>();
             _autoMock.Resolve<IPersonRepository>().EmailBelongsToSomeoneElse(_person.EmailAddress).Returns(true);
 
             // Act
-            var viewResult = controller.Create(_person) as ViewResult;
+            var viewResult = _controller.Create(_person) as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -99,7 +98,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             var model = viewResult.Model as Person;
             Assert.That(model, Is.SameAs(_person), "Model was passed through to view");
 
-            Assert.That(controller.ModelState["EmailAddress"].Errors[0].ErrorMessage, Is.EqualTo("The Email address must be unique; that email address already exists in the system."), "There is a model state error against the email address field");
+            Assert.That(_controller.ModelState["EmailAddress"].Errors[0].ErrorMessage, Is.EqualTo("The Email address must be unique; that email address already exists in the system."), "There is a model state error against the email address field");
         }
 
         [Test]
@@ -109,7 +108,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             _autoMock.Resolve<IPersonRepository>().EmailBelongsToSomeoneElse(Arg.Any<string>()).Returns(false);
 
             // Act
-            var redirectResult = _autoMock.Resolve<PersonController>().Create(_person) as RedirectToRouteResult;
+            var redirectResult = _controller.Create(_person) as RedirectToRouteResult;
 
             // Assert
             Assert.That(redirectResult, Is.Not.Null, "Controller returned redirect");
@@ -127,7 +126,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             // Arrange
 
             // Act
-            var result = _autoMock.Resolve<PersonController>().Edit(0) as HttpStatusCodeResult;
+            var result = _controller.Edit(0) as HttpStatusCodeResult;
 
             // Assert
             Assert.That(result, Is.Not.Null, "Controller returned Http Status");
@@ -141,7 +140,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             _autoMock.Resolve<IPersonRepository>().GetById(PersonId).Returns(_person);
 
             // Act
-            var viewResult = _autoMock.Resolve<PersonController>().Edit(PersonId) as ViewResult;
+            var viewResult = _controller.Edit(PersonId) as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -155,11 +154,10 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
         public void Should_return_edit_view_with_person_model_after_post_to_edit_with_invalid_model()
         {
             // Arrange
-            var controller = _autoMock.Resolve<PersonController>();
-            controller.ModelState.AddModelError("Key", "Error");
+            _controller.ModelState.AddModelError("Key", "Error");
 
             // Act
-            var viewResult = controller.Edit(PersonId, _person) as ViewResult;
+            var viewResult = _controller.Edit(PersonId, _person) as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -173,11 +171,10 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
         public void Should_return_edit_view_with_person_model_and_error_after_post_to_edit_with_duplicate_email()
         {
             // Arrange
-            var controller = _autoMock.Resolve<PersonController>();
             _autoMock.Resolve<IPersonRepository>().EmailBelongsToSomeoneElse(_person.EmailAddress, PersonId).Returns(true);
 
             // Act
-            var viewResult = controller.Edit(PersonId, _person) as ViewResult;
+            var viewResult = _controller.Edit(PersonId, _person) as ViewResult;
 
             // Assert
             Assert.That(viewResult, Is.Not.Null, "Controller returned view");
@@ -186,7 +183,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             var model = viewResult.Model as Person;
             Assert.That(model, Is.SameAs(_person), "Model was passed through to view");
 
-            Assert.That(controller.ModelState["EmailAddress"].Errors[0].ErrorMessage, Is.EqualTo("The Email address must be unique; that email address already exists in the system."), "There is a model state error against the email address field");
+            Assert.That(_controller.ModelState["EmailAddress"].Errors[0].ErrorMessage, Is.EqualTo("The Email address must be unique; that email address already exists in the system."), "There is a model state error against the email address field");
         }
 
         [Test]
@@ -196,7 +193,7 @@ namespace TerseControllerTesting.Tests._02_AutoMocking
             _autoMock.Resolve<IPersonRepository>().EmailBelongsToSomeoneElse(Arg.Any<string>(), Arg.Any<int>()).Returns(false);
 
             // Act
-            var redirectResult = _autoMock.Resolve<PersonController>().Edit(PersonId, _person) as RedirectToRouteResult;
+            var redirectResult = _controller.Edit(PersonId, _person) as RedirectToRouteResult;
 
             // Assert
             Assert.That(redirectResult, Is.Not.Null, "Controller returned redirect");
