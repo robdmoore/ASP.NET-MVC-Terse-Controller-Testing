@@ -74,6 +74,8 @@
     <Compile Include="03_MVCContrib.TestHelper\PersonControllerUnitTests.cs" />
     <Compile Include="04_CustomSyntax\MvcControllerTestingExtensions.cs" />
     <Compile Include="04_CustomSyntax\PersonControllerUnitTests.cs" />
+    <Compile Include="05_CustomSyntax2\MvcControllerTestingExtensions.cs" />
+    <Compile Include="05_CustomSyntax2\PersonControllerUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
