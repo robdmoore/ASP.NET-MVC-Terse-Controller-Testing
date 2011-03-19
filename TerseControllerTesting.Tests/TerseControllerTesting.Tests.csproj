@@ -78,6 +78,9 @@
     <Compile Include="05_CustomSyntax2\PersonControllerUnitTests.cs" />
     <Compile Include="05_CustomSyntax2\SomeOtherTests.cs" />
     <Compile Include="05_CustomSyntax2\TestController.cs" />
+    <Compile Include="06_CustomSyntax3\MvcControllerTestingExtensions.cs" />
+    <Compile Include="06_CustomSyntax3\BddPersonControllerUnitTests.cs" />
+    <Compile Include="06_CustomSyntax3\PersonControllerUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
