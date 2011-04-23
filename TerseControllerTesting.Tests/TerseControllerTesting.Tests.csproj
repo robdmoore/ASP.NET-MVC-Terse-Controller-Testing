@@ -40,6 +40,10 @@
     <Reference Include="AutofacContrib.NSubstitute">
       <HintPath>..\packages\AutofacContrib.NSubstitute.2.4.3.700\lib\Net40\AutofacContrib.NSubstitute.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET40ClientProfile\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib.TestHelper">
       <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.60.0\lib\MvcContrib.TestHelper.dll</HintPath>
     </Reference>
@@ -81,6 +85,8 @@
     <Compile Include="06_CustomSyntax3\MvcControllerTestingExtensions.cs" />
     <Compile Include="06_CustomSyntax3\BddPersonControllerUnitTests.cs" />
     <Compile Include="06_CustomSyntax3\PersonControllerUnitTests.cs" />
+    <Compile Include="07_CustomSyntax4\MvcControllerTestingExtensions.cs" />
+    <Compile Include="07_CustomSyntax4\PersonControllerUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

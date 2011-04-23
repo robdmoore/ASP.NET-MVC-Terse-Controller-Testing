@@ -13,10 +13,13 @@ namespace TerseControllerTesting.Controllers
             _personRepository = personRepository;
         }
 
+        // Needed for the dynamic proxy generation for some reason :S
+        public PersonController() {}
+
         //
         // GET: /Person/
 
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View(_personRepository.GetAll());
         }
@@ -24,7 +27,7 @@ namespace TerseControllerTesting.Controllers
         //
         // GET: /Person/Create
 
-        public ActionResult Create()
+        public virtual ActionResult Create()
         {
             return View("Edit");
         } 
@@ -33,7 +36,7 @@ namespace TerseControllerTesting.Controllers
         // POST: /Person/Create
 
         [HttpPost]
-        public ActionResult Create(Person person)
+        public virtual ActionResult Create(Person person)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +57,7 @@ namespace TerseControllerTesting.Controllers
         //
         // GET: /Person/Edit/5
  
-        public ActionResult Edit(int id)
+        public virtual ActionResult Edit(int id)
         {
             var person = _personRepository.GetById(id);
             if (person == null)
@@ -67,7 +70,7 @@ namespace TerseControllerTesting.Controllers
         // POST: /Person/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, Person person)
+        public virtual ActionResult Edit(int id, Person person)
         {
             if (ModelState.IsValid)
             {
